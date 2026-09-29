@@ -1,6 +1,7 @@
 import './App.css';
 import Task from './components/Task';
 import { useState } from 'react';
+import AddTaskForm from './components/Form';
 
 //List of Tasks
 function App() {
@@ -45,8 +46,10 @@ function App() {
           deleteTask={() => deleteHandler(index)}
         />
   ))} 
+      <AddTaskForm />
     </div>
   );
+  
 }
 
 export default App;
