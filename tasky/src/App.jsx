@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import Task from './components/Task';
 import { useState } from 'react';
@@ -30,6 +31,50 @@ function App() {
     setTaskState({tasks});
   } 
 
+
+  //Stores contents of the form
+  const [ formState, setFormState ] = useState({
+    title: "",
+    description: "",
+    deadline: ""
+  });
+
+
+  //Handles the changes 
+  const formChangeHandler = (event) => {
+    let form = {...formState};
+
+    switch(event.target.name) {
+      case "title":
+          form.title = event.target.value;
+          break;
+      case "description":
+          form.description = event.target.value;
+          break;
+      case "deadline":
+          form.deadline = event.target.value;
+          break;
+      default:
+          form = formState;
+    }
+    setFormState(form);
+  }
+
+
+  //Adds unique Id's
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    const tasks = [...taskState.tasks];
+    const form = {...formState};
+
+    form.id = uuidv4();
+    
+    tasks.push(form);
+    setTaskState({tasks});
+  }
+
+
   //All the components of the list
   return (
     <div className="container">
@@ -46,7 +91,8 @@ function App() {
           deleteTask={() => deleteHandler(index)}
         />
   ))} 
-      <AddTaskForm />
+      <AddTaskForm submit={formSubmitHandler} change={formChangeHandler} />
+      console.log(formState);
     </div>
   );
   
