@@ -45,3 +45,9 @@ div {
   font-style: italic;
   color: blueviolet;
 }
+
+.priority{
+  font-size: large;
+  font-style: oblique;
+  font-weight: bold;
+}
